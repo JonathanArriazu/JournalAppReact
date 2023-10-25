@@ -3,7 +3,6 @@ import { AppBar, Grid, IconButton, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 
 export const NavBar = ({ fixedWidth = 240}) => {
-    console.log(fixedWidth)
   return (
     <AppBar
         position='fixed'
