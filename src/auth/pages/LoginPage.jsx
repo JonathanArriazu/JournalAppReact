@@ -12,19 +12,17 @@ export const LoginPage = () => {
 
   const { status, errorMessage } = useSelector( state => state.auth);
 
-  //const isAutenticating = useMemo( () => status === 'checking', [status]);
-
   const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm({
-    email: 'jonathanarriazu@gmail.com',
-    password: 123456
+  const { email, password, onInputChange, formState } = useForm({
+    email: '',
+    password: ''
   })
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email, password)
-    dispatch(startLoginWithEmailPassword({email, password}));
+    dispatch(startLoginWithEmailPassword(formState));
   }
 
   const onGoogleSignIn = () => {
@@ -64,9 +62,9 @@ export const LoginPage = () => {
           </Grid>
 
           <Grid 
-              item 
-              xs={ 12 }
-              display={errorMessage ? '' : 'none'}              
+              item
+              display={errorMessage ? '' : 'none'}
+              sx={{ mt:1 }}              
             >
               <Alert severity='error'>{ errorMessage }</Alert>
             </Grid>
