@@ -1,2 +1,3 @@
+export * from './ImageGallery';
 export * from './NavBar';
-export { default as SideBar } from './SideBar';
+export * from './SideBar';
