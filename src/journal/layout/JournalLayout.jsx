@@ -6,7 +6,7 @@ const fixedWidth = 280;
 
 export const JournalLayout = ({ children }) => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} className='animate__animated animate__fadeIn animate_faster'>
         {/* Navbar sidebarWidth*/}
         <NavBar fixedWidth={ fixedWidth }/>
         {/* Sidebar sidebarWidth*/}
