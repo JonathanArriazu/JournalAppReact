@@ -6,7 +6,7 @@ import { Google } from '@mui/icons-material'
 import { AuthLayouth } from '../layout/AuthLayouth'
 
 import { useForm } from '../../hooks'
-import { checkingAuthentication, startGoogleSignIn } from '../../store/auth'
+import { startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth'
 
 export const LoginPage = () => {
 
@@ -24,7 +24,7 @@ export const LoginPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email, password)
-    dispatch(checkingAuthentication());
+    dispatch(startLoginWithEmailPassword({email, password}));
   }
 
   const onGoogleSignIn = () => {
