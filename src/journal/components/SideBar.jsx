@@ -2,7 +2,7 @@ import { TurnedInNot } from '@mui/icons-material'
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 
-const SideBar = ({fixedWidth}) => {
+export const SideBar = ({fixedWidth}) => {
   return (
     <Box
         component='nav'
@@ -44,5 +44,3 @@ const SideBar = ({fixedWidth}) => {
     </Box>
   )
 }
-
-export default SideBar
