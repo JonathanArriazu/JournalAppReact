@@ -4,9 +4,15 @@ import './index.css';
 import { JournalApp } from './JournalApp';
 import { BrowserRouter } from 'react-router-dom';
 
+
+import { Provider } from 'react-redux'
+import { store } from './store';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter >
-    <JournalApp />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter >
+      <JournalApp />
+    </BrowserRouter>
+  </Provider>
 );
