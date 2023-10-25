@@ -4,11 +4,13 @@ import { Button, Grid, Link, TextField, Typography } from '@mui/material'
 import { AuthLayouth } from '../layout/AuthLayouth'
 import { useForm } from '../../hooks'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { startCreatingUserWithEmailPassword } from '../../store/auth/thunks'
 
 const formData = {
-  displayName: 'Jonathan Arriazu',
-  email: 'jonathanarriazu@gmail.com',
-  password: 1234567
+  email: '',
+  password: '',
+  displayName: ''
 }
 
 const formValidations = {
@@ -19,6 +21,7 @@ const formValidations = {
 
 export const RegisterPage = () => {
 
+  const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false)
   
   const { displayName, email, password, onInputChange, formState,
@@ -31,7 +34,7 @@ export const RegisterPage = () => {
 
     if (!isFormValid) return
 
-    console.log(formState)
+    dispatch( startCreatingUserWithEmailPassword(formState) );
   }
 
   return (
