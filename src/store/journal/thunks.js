@@ -1,9 +1,14 @@
 import { collection, doc, setDoc } from 'firebase/firestore/lite'
 import { FirebaseDB } from '../../firebase/config';
-import { addNewEmptyNote } from './journalSlice';
+import { addNewEmptyNote, savingNewNote, setActiveNote } from './journalSlice';
 
 export const startNewNote = () => {
     return async(dispatch, getState) => {
+
+        //Agregamos esta accion para setear el estado de isSaving de false a true
+        //cuando se agrega una nueva nota, para deshabilitar el boton mientras
+        //se termina de agregar.
+        dispatch(savingNewNote());
 
         //uid => consigo el uid con el getState, lo cual me servira para
         // crear un path en donde se almacenaran las notas para cada usuario
@@ -27,6 +32,9 @@ export const startNewNote = () => {
 
         //Envio a la newNote como payload
         dispatch (addNewEmptyNote(newNote))
+        //Envio la newNote a setActive para que cambie su estado a "activo"
+        dispatch (setActiveNote(newNote))
+
     }
 }
 

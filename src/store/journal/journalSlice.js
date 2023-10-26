@@ -16,6 +16,9 @@ export const journalSlice = createSlice({
        } */
     },
     reducers: {
+        savingNewNote: (state) => {
+            state.isSaving = true;
+        },
         addNewEmptyNote: (state, action) => { // AGREGAR
             //Agrego la nueva nota que viene en el payload al notes del initial state
             state.notes.push( action.payload);
@@ -23,7 +26,9 @@ export const journalSlice = createSlice({
             state.isSaving = false;
         },
         setActiveNote: (state, action) => {
-
+            //El payload es la nota que quiero ver en pantalla
+            state.active = action.payload
+            //Con esto, el active pasa de null a un active donde se mostrara toda la info de la nota
         },
         setNotes: (state, action) => {
 
@@ -41,6 +46,7 @@ export const journalSlice = createSlice({
 });
 
 export const { 
+    savingNewNote,
     addNewEmptyNote,
     setActiveNote,
     setNotes,
