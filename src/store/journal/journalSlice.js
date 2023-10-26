@@ -41,7 +41,10 @@ export const journalSlice = createSlice({
         updateNote: (state, action) => { //ACTUALIZAR
             state.isSaving = false;
             state.notes = state.notes.map( note => {
-                
+                //el action.payload es la nota actualizada
+
+                //si el id almacenado en el array de notes es igual al id de la nota actualizada
+                // voy a actualizar esa id por el action.payload
                 if (note.id === action.payload.id) {
                     return action.payload;
                 }

@@ -73,6 +73,8 @@ export const startSaveNotes = () => {
         //firestore y no en lo que estoy enviando, para que no se eliminen o den error, sino que 
         // mantenga y una todo
 
+        //llamamos a updateNote el cual actualiza el listado de note que tenemos en el estado
+        //ya que solamente estamos actualizando la nota activa pero no esa nota en el array de notes
         dispatch(updateNote(note))
 
     }
