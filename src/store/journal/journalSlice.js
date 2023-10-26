@@ -34,11 +34,22 @@ export const journalSlice = createSlice({
             //Establezco las notas que traemos de firebase DB y las colocamos en notes del state
             state.notes = action.payload;
         },
-        setSaving: (state) => { // => solo tiene state porque lo unico que queremos es colocarlo en true
-
+        setSaving: (state) => {
+            state.isSaving = true;
+            //TODO: mensaje de error
         },
-        updateeNote: (state, action) => { //ACTUALIZAR
+        updateNote: (state, action) => { //ACTUALIZAR
+            state.isSaving = false;
+            state.notes = state.notes.map( note => {
+                
+                if (note.id === action.payload.id) {
+                    return action.payload;
+                }
 
+                return note;
+            });
+
+            //TODO: mostrar mensaje de actualizacion
         },
         deleteNoteById: (state, action) => { //ELIMINAR
 
@@ -52,6 +63,6 @@ export const {
     setActiveNote,
     setNotes,
     setSaving,
-    updateeNote,
+    updateNote,
     deleteNoteById
  } = journalSlice.actions;

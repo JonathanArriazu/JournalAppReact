@@ -1,8 +1,7 @@
 import { collection, doc, setDoc } from 'firebase/firestore/lite'
 import { FirebaseDB } from '../../firebase/config';
-import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes } from './journalSlice';
+import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving, updateNote } from './journalSlice';
 import { loadNotes } from '../../helpers';
-import { useSelector } from 'react-redux';
 
 export const startNewNote = () => {
     return async(dispatch, getState) => {
@@ -50,5 +49,31 @@ export const startLoadingNotes = () => {
 
         //Llamo a la accion que establece las notas de arriba en el array de notas del estado
         dispatch(setNotes(notes));
+    }
+}
+
+export const startSaveNotes = () => {
+    return async (dispatch, getState) => {
+        
+        //Mando a llamar setSaving para colocar isSaving en true
+        dispatch(setSaving());
+
+        const {uid} = getState().auth;
+        const {active: note} = getState().journal;
+
+        //La nota activa trae un id, pero yo no quiero enviar ese id a firestore, entonces:
+        const noteToFireStore = {...note};
+        delete noteToFireStore.id; // esto es JS: elimino el id del noteToFireStore
+
+        //Creamos la referencia al documento
+        const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`)
+        //Ahora seteamos el nuevo documento a enviar
+        await setDoc(docRef, noteToFireStore, {merge: true});
+        //El merge sirve para permitir realizar la union cuando hay campos que existen en
+        //firestore y no en lo que estoy enviando, para que no se eliminen o den error, sino que 
+        // mantenga y una todo
+
+        dispatch(updateNote(note))
+
     }
 }
