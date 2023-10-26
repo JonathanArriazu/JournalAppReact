@@ -29,6 +29,8 @@ export const journalSlice = createSlice({
             //El payload es la nota que quiero ver en pantalla
             state.active = action.payload
             //Con esto, el active pasa de null a un active donde se mostrara toda la info de la nota
+
+            state.messageSaved= '';
         },
         setNotes: (state, action) => {
             //Establezco las notas que traemos de firebase DB y las colocamos en notes del state
@@ -36,7 +38,7 @@ export const journalSlice = createSlice({
         },
         setSaving: (state) => {
             state.isSaving = true;
-            //TODO: mensaje de error
+            state.messageSaved= '';
         },
         updateNote: (state, action) => { //ACTUALIZAR
             state.isSaving = false;
@@ -52,7 +54,9 @@ export const journalSlice = createSlice({
                 return note;
             });
 
-            //TODO: mostrar mensaje de actualizacion
+            //Cuando la nota se actualiza, muestro mensaje
+            state.messageSaved = `${action.payload.title}, actualizada correctamente`;
+
         },
         deleteNoteById: (state, action) => { //ELIMINAR
 

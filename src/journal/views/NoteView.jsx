@@ -6,12 +6,13 @@ import { useForm } from '../../hooks/useForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActiveNote } from '../../store/journal/journalSlice'
 import { startSaveNotes } from '../../store/journal/thunks'
+import Swal from 'sweetalert2'
 
 export const NoteView = () => {
 
     const dispatch = useDispatch();
 
-    const {active: note} = useSelector(state => state.journal); // active ahora va a ser conocida como note
+    const {active: note, messageSaved} = useSelector(state => state.journal); // active ahora va a ser conocida como note
 
     const { body, title, date, onInputChange, formState } = useForm(note);
 
@@ -28,6 +29,12 @@ export const NoteView = () => {
     const onSaveNote = () => {
         dispatch(startSaveNotes());
     }
+
+    useEffect(() => {
+        if ( messageSaved.length > 0 ) {
+            Swal.fire('Nota actualizada', messageSaved, 'success');
+        }
+      }, [messageSaved])
     
 
   return (
