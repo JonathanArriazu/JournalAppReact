@@ -7,6 +7,7 @@ import { CheckingAuth } from '../ui/components/CheckingAuth'
 import { onAuthStateChanged } from 'firebase/auth'
 import { FirebaseAuth } from '../firebase/config'
 import { login, logout } from '../store/auth'
+import { startLoadingNotes } from '../store/journal/thunks'
 
 export const AppRouter = () => {
 
@@ -20,6 +21,9 @@ export const AppRouter = () => {
       if (!user) return dispatch(logout());
 
       dispatch( login(user))
+      
+      //Realizamos aqui el dispatch de las notas que ese usuario tiene, para traerlas de firebase DB
+      dispatch( startLoadingNotes());
 
     })
 

@@ -31,7 +31,8 @@ export const journalSlice = createSlice({
             //Con esto, el active pasa de null a un active donde se mostrara toda la info de la nota
         },
         setNotes: (state, action) => {
-
+            //Establezco las notas que traemos de firebase DB y las colocamos en notes del state
+            state.notes = action.payload;
         },
         setSaving: (state) => { // => solo tiene state porque lo unico que queremos es colocarlo en true
 
